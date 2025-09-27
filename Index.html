@@ -194,6 +194,45 @@
     cursor: pointer;
     color: blue;
 }
+.reset-box {
+            display: none; 
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 350px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-align: center;
+    margin: 80px auto;
+        }
+        .reset-box h2 {
+            margin-bottom: 20px;
+        }
+         .reset-box h3 {
+        text-align: left;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        font-size: 16px;
+        color: #222;
+}
+        .reset-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+        .reset-box button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            background: rgb(116,201,184);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .reset-box button:hover {
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
@@ -220,7 +259,6 @@
         }
         type();
     </script>
-
     <div class="tab-container">
         <div class="tabs">
             <div class="tab active" onclick="switchTab('login')">Login</div>
@@ -250,19 +288,26 @@
             <button class="facebook"><i class="fa-brands fa-facebook"></i> Signup with Facebook</button>
             <button class="google"><i class="fa-brands fa-google"></i> Signup with Google</button>
         </div>
+          </div>
        <!-- Forgot Password Modal -->
 <div id="forgotModal">
     <div class="modal-box">
         <h2>Reset Password</h2>
-        <p>Enter your email address and we’ll send you a reset link.</p>
+        <p>Enter your registered email to reset password.</p>
         <input type="email" id="resetEmail" placeholder="Enter your email">
         <button onclick="sendReset()">Send Reset Link</button>
         <p class="cancel" onclick="closeModal()">Cancel</p>
     </div>
 </div>
-</div>
+        <!--Reset Password Modal  -->
+ <div class="reset-box">
+        <h2>Change Password</h2>
+         <h3>New Password</h3>
+        <input type="password" placeholder="New Password" id="newPass">
+        <h3>Confirm Password</h3>
+        <input type="password" placeholder="Confirm Password" id="confirmPass">
+        <button>Submit</button>
     </div>
-
     <script>
         function switchTab(tab) {
             document.querySelectorAll('.form').forEach(f => f.classList.remove('active'));
@@ -273,26 +318,20 @@
          function openModal() {
         document.getElementById('forgotModal').style.display = 'flex';
     }
-
     function closeModal() {
         document.getElementById('forgotModal').style.display = 'none';
         document.getElementById('resetEmail').value = '';
     }
-
     function sendReset() {
-        const email = document.getElementById('resetEmail').value.trim();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email) {
-            alert("Please enter your email.");
-        } else if (!emailRegex.test(email)) {
-            alert("Please enter a valid email.");
-        } else {
-            alert(`A password reset link has been sent to ${email}.`);
-            closeModal();
-    
-        }
+    const email = document.getElementById("resetEmail").value;
+    if(email === "") {
+        alert("Please enter your email.");
+        return;
     }
+    closeModal();
+    document.querySelector(".tab-container").style.display = "none";
+    document.querySelector(".reset-box").style.display = "block";
+}   
     </script>
 </body>
-
 </html>
